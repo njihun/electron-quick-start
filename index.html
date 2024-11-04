@@ -8,11 +8,56 @@
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <!-- 타이틀을 위한 헤더 -->
+    <header>
+      <h1>Game Title</h1>
+      <p>Welcome to the world of adventure!</p>
+    </header>
 
+    <!-- 초기화면 메뉴 구성 -->
+    <nav aria-label="Main Menu">
+      <ul>
+        <li><button id="start-game">Start Game</button></li>
+        <li><button id="settings">Settings</button></li>
+        <li><button id="instructions">Instructions</button></li>
+      </ul>
+    </nav>
+
+    <!-- 푸터에 저작권 정보 또는 소셜 링크 추가 가능 -->
+    <footer>
+      <p>&copy; 2025 Game Studio. All rights reserved.</p>
+    </footer>
+    
+    <div class="info" style="right: 0;">
+      v<span id="node-version"></span>
+    </div>
+
+    <!-- <div class="ad-banner">
+      광고 배너 자리
+    </div> -->
+
+    <div id="overlay">
+      <div class="modal" id="start-game">start</div>
+      <div class="modal" id="settings">
+        <h3 style="flex-grow: 0;">Settings</h3>
+        <ul style="overflow-y: auto; flex-grow: 1;">
+            <li><button>1</button></li>
+            <li><button>2</button></li>
+            <li><button>3</button></li>
+            <li><button>4</button></li>
+            <li><button>5</button></li>
+            <li><button>6</button></li>
+            <li><button>7</button></li>
+            <li><button>8</button></li>
+            <li><button>9</button></li>
+            <li><button>10</button></li>
+        </ul>
+        <div style="background-color: skyblue; padding: 1em; flex-grow: 0;">아아</div>
+    </div>
+    
+      <div class="modal" id="instructions">intructions</div>
+    </div>
+  
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>

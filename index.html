@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    
     <link href="./styles.css" rel="stylesheet">
     <title>Hello World!</title>
   </head>
@@ -11,15 +12,15 @@
     <!-- 타이틀을 위한 헤더 -->
     <header>
       <h1>Game Title</h1>
-      <p>Welcome to the world of adventure!</p>
+      <p class="translate" data-transKey="welcome">Welcome to the world of adventure!</p>
     </header>
 
     <!-- 초기화면 메뉴 구성 -->
     <nav aria-label="Main Menu">
       <ul>
-        <li><button id="start-game">Start Game</button></li>
-        <li><button id="settings">Settings</button></li>
-        <li><button id="instructions">Instructions</button></li>
+        <li><button id="startGame" class="translate" data-transKey="startGame">Start Game</button></li>
+        <li><button id="settings" class="translate" data-transKey="settings">Settings</button></li>
+        <li><button id="instructions" class="translate" data-transKey="instructions">Instructions</button></li>
       </ul>
     </nav>
 
@@ -32,33 +33,24 @@
       v<span id="node-version"></span>
     </div>
 
-    <!-- <div class="ad-banner">
+    <div class="ad-banner">
       광고 배너 자리
-    </div> -->
+    </div>
 
     <div id="overlay">
-      <div class="modal" id="start-game">start</div>
+      <div class="modal" id="startGame" class="translate" data-transKey="startGame">Start Game</div>
       <div class="modal" id="settings">
-        <h3 style="flex-grow: 0;">Settings</h3>
-        <ul style="overflow-y: auto; flex-grow: 1;">
-            <li><button>1</button></li>
-            <li><button>2</button></li>
-            <li><button>3</button></li>
-            <li><button>4</button></li>
-            <li><button>5</button></li>
-            <li><button>6</button></li>
-            <li><button>7</button></li>
-            <li><button>8</button></li>
-            <li><button>9</button></li>
-            <li><button>10</button></li>
+        <h3 style="flex-grow: 0;" class="translate" data-transKey="settings">Settings</h3>
+        <ul style="flex-grow: 1;">
+          <li><button class="translate" data-transKey="language">Language</button></li>
+          <li><button class="translate" data-transKey="controls">Controls</button></li>
         </ul>
-        <div style="background-color: skyblue; padding: 1em; flex-grow: 0;">아아</div>
-    </div>
-    
-      <div class="modal" id="instructions">intructions</div>
+        <button style="flex-grow: 0;" class="translate" data-transKey="back">Back</button>
+      </div>
+      <div class="modal" id="instructions" class="translate" data-transKey="instructions">Instructions</div>
     </div>
   
     <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <script type="module" src="./renderer.js"></script>
   </body>
 </html>

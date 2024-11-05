@@ -1,5 +1,5 @@
 import * as settings from "./settings.js";
-import { translateAll } from "./translate.js";
+import { translate, translateAll } from "./translate.js";
 function adjustFontSize() {
     const width = window.innerWidth;
 
@@ -22,9 +22,9 @@ function menuAction(element) {
             let div = document.createElement('div');
             let div2 = document.createElement('div');
             let span = document.createElement('span');
-            span.textContent = 'Loading';
-            span.classList.add('translate');
-            span.setAttribute('data-transKey', 'loading');
+            span.textContent = translate('loading');
+            // span.classList.add('translate');
+            // span.setAttribute('data-transKey', 'loading');
             div2.appendChild(span);
             div2.innerHTML += '..';
             div.appendChild(div2);
@@ -49,7 +49,7 @@ function menuAction(element) {
 
             // 사용자 인증 확인
             span.textContent = 'Authentication? ';
-            if (true) {
+            if (false) {
                 span.textContent += 'OK';
             } else {
                 span.textContent += 'false';
@@ -71,7 +71,17 @@ function menuAction(element) {
     }
     if (element.children[1].children[1].textContent.endsWith('false')) {
         // 입장 불가
-        settings.printToTerm("Can not Enter.");
+        element.children[1].children[0].textContent = translate('rejectEnter');
+        let btn = document.createElement('button');
+        btn.textContent = translate('back');
+        btn.setAttribute('data-transKey', 'back');
+        btn.addEventListener('click', () => {
+            while (element.children.length > 1) {
+                element.removeChild(element.lastChild);
+            }
+            document.querySelector('#overlay').style.display = 'none';
+        });
+        element.appendChild(btn);
     }
 }
 // 메뉴 클릭 이벤트

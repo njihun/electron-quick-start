@@ -21,6 +21,7 @@
         <li><button id="startGame" class="translate" data-transKey="startGame">Start Game</button></li>
         <li><button id="settings" class="translate" data-transKey="settings">Settings</button></li>
         <li><button id="instructions" class="translate" data-transKey="instructions">Instructions</button></li>
+        <div style="font-size: 0.7em; color: #999;"><span class="translate" data-transKey="enterHelp">게임에 입장할 수 없나요?</span> <a href="#" style="color: dodgerblue;" class="translate" data-transKey="help">도움말</a></div>
       </ul>
     </nav>
 
@@ -33,23 +34,27 @@
       v<span id="node-version"></span>
     </div>
 
-    <div class="ad-banner">
+    <!-- <div class="ad-banner">
       광고 배너 자리
-    </div>
+    </div> -->
 
     <div id="overlay">
       <div class="modal" id="startGame">
         <div class="translate" data-transKey="startGame">Start Game</div>
       </div>
       <div class="modal" id="settings">
-        <h3 style="flex-grow: 0;" class="translate" data-transKey="settings">Settings</h3>
+        <h3 class="translate" data-transKey="settings">Settings</h3>
         <ul style="flex-grow: 1;">
           <li><button class="translate" data-transKey="language">Language</button></li>
           <li><button class="translate" data-transKey="controls">Controls</button></li>
         </ul>
-        <button style="flex-grow: 0;" class="translate" data-transKey="back">Back</button>
+        <button class="translate" data-transKey="back">Back</button>
       </div>
-      <div class="modal" id="instructions" class="translate" data-transKey="instructions">Instructions</div>
+      <div class="modal" id="instructions">
+        <div class="translate" data-transKey="instructions">Instructions</div>
+        <div style="flex-grow: 1;"></div>
+        <button class="translate" data-transKey="back">Back</button>
+      </div>
     </div>
   
     <!-- You can also require other files to run in this process -->

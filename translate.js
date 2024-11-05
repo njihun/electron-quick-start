@@ -9,7 +9,10 @@ const languages = {
         controls: 'Controls',
         err404: 'Page not found.',
         err404Count: 'Returning to the main page in 0 second.',
-        loading: 'Loading'
+        loading: 'Loading',
+        rejectEnter: 'Cannot Enter.',
+        enterHelp: 'Can\'t enter the game?',
+        help: 'Help'
         // Add other phrases as needed
     },
     ko: {
@@ -22,7 +25,10 @@ const languages = {
         controls: '조작',
         err404: '페이지를 찾을 수 없습니다.',
         err404Count: '0초 후에 메인 페이지로 돌아갑니다.',
-        loading: '로드 중'
+        loading: '로드 중',
+        rejectEnter: '입장할 수 없습니다.',
+        enterHelp: '게임에 입장할 수 없나요?',
+        help: '도움말'
         // Add other phrases as needed
     },
     // Add other languages as needed
@@ -34,11 +40,11 @@ export const sharedState = {
 }
 // langCode 저장
 localStorage.setItem('langCode', sharedState.langCode);
-export function translate(element) {
-    return languages[sharedState.langCode.split('-')[0]][element.getAttribute('data-transKey')];
+export function translate(key) {
+    return languages[sharedState.langCode.split('-')[0]][key];
 }
 export function translateAll(element = document) {
     element.querySelectorAll('.translate').forEach((e)=>{
-        e.textContent = translate(e);
+        e.textContent = translate(e.getAttribute('data-transKey'));
     });
 }

@@ -1,4 +1,10 @@
-import { sharedState, translate, translateAll } from "./translate.js";
+import { sharedState, translateAll } from "./translate.js";
+export function goToPage(filename) {
+    window.electronAPI.navigateTo(filename);
+}
+export function printToTerm(text) {
+    window.electronAPI.print(text);
+}
 export function language() {
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -23,6 +29,7 @@ export function language() {
         btn.textContent = e.lang;
         btn.onclick = () => {
             sharedState.langCode = e.code;
+            localStorage.setItem('langCode', sharedState.langCode);
             translateAll(modal);
         };
 

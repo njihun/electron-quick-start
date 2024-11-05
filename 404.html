@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>404 Not Found</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+        body {
+            margin: 0;
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Gowun Batang", serif;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="translate" data-transKey="err404">Page not found.</h1><br>
+        <div class="translate" data-transKey="err404Count">Returning to the main page in 0 second.</div>
+    </div>
+    <script type="module">
+        import { goToPage } from "./settings.js";
+        import { translateAll } from "./translate.js";
+        let count = 10;
+        document.body.onload = () => {
+            translateAll();
+            document.querySelector('[data-transKey=err404Count]').innerHTML = document.querySelector('[data-transKey=err404Count]').innerHTML.replace('0', '<span></span>');
+            document.querySelector('span').textContent = count;
+            counting();
+        };
+        function counting() {
+            setTimeout(() => {
+                document.querySelector('span').textContent = --count;
+                if (count > 0) {
+                    counting();
+                } else {
+                    goToPage('index.html');
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

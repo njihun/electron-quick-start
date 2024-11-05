@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
-    
+
     <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
+    <title>Game Title</title>
   </head>
   <body>
     <!-- 타이틀을 위한 헤더 -->
@@ -38,7 +38,9 @@
     </div>
 
     <div id="overlay">
-      <div class="modal" id="startGame" class="translate" data-transKey="startGame">Start Game</div>
+      <div class="modal" id="startGame">
+        <div class="translate" data-transKey="startGame">Start Game</div>
+      </div>
       <div class="modal" id="settings">
         <h3 style="flex-grow: 0;" class="translate" data-transKey="settings">Settings</h3>
         <ul style="flex-grow: 1;">

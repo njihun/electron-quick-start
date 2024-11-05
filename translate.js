@@ -1,5 +1,3 @@
-import { language } from "./settings.js";
-
 const languages = {
     en: {
         startGame: "Start Game",
@@ -9,6 +7,9 @@ const languages = {
         back: 'Back',
         language: 'Language',
         controls: 'Controls',
+        err404: 'Page not found.',
+        err404Count: 'Returning to the main page in 0 second.',
+        loading: 'Loading'
         // Add other phrases as needed
     },
     ko: {
@@ -19,17 +20,25 @@ const languages = {
         back: '돌아가기',
         language: '언어',
         controls: '조작',
+        err404: '페이지를 찾을 수 없습니다.',
+        err404Count: '0초 후에 메인 페이지로 돌아갑니다.',
+        loading: '로드 중'
         // Add other phrases as needed
     },
     // Add other languages as needed
 };
 
-export const sharedState = { langCode: 'en-US' };
-export function translate(key) {
-    return languages[sharedState.langCode.split('-')[0]][key];
+// langCode 불러오기
+export const sharedState = {
+    langCode: localStorage.getItem('langCode') || 'en-US'
+}
+// langCode 저장
+localStorage.setItem('langCode', sharedState.langCode);
+export function translate(element) {
+    return languages[sharedState.langCode.split('-')[0]][element.getAttribute('data-transKey')];
 }
 export function translateAll(element = document) {
     element.querySelectorAll('.translate').forEach((e)=>{
-        e.textContent = translate(e.getAttribute('data-transKey'));
+        e.textContent = translate(e);
     });
 }

@@ -1,10 +1,12 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
+const fs = require('fs');
 
+let mainWindow;
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 600,
     webPreferences: {
@@ -23,6 +25,27 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
+// 렌더러에서 전환 요청을 받는 이벤트 리스너 설정
+ipcMain.on('navigate-to', (event, filename) => {
+  if (mainWindow) {
+    if (!filename) {
+      mainWindow.loadFile('404.html');
+      return;
+    }
+    // 파일 존재 여부 확인
+    fs.access(path.join(__dirname, filename), fs.constants.F_OK, (err) => {
+      if (err) {
+        mainWindow.loadFile('404.html');
+      } else {
+        mainWindow.loadFile(filename);
+      }
+    });
+  }
+});
+//터미널 출력
+ipcMain.on('print', (event, text) => {
+  process.stdout.write(JSON.stringify(text));
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

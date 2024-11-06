@@ -5,6 +5,9 @@ export function goToPage(filename) {
 export function printToTerm(text) {
     window.electronAPI.print(text);
 }
+export function loadToBrowser(url) {
+    window.electronAPI.loadGH(url);
+}
 export function language() {
     let modal = document.createElement('div');
     modal.classList.add('modal');

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>launcher</title>
+  </head>
+  <body>
+    <header>로그인</header>
+    <div id="content">
+      <div>
+        <section id="run">
+          <div>
+            <button onclick="window.electronAPI.quit();">종료</button>
+            <button>플레이</button>
+          </div>
+        </section>
+        <div>
+          <section>
+            <h2>앱 정보</h2>
+            <p>아아아ㅏ</p>
+          </section>
+          <section>
+            <h2>정책</h2>
+            <p>
+              <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/term');">이용약관</span>
+              <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/privacy');">개인정보처리방침</span>
+              <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app');">운영정책</span>
+            </p>
+          </section>
+          <div class="ad-banner" style="width: 300px; height: 250px; margin: 0 auto;">배너 광고</div>
+          <section>
+            <h2>앱 지원</h2>
+            <article>
+              <h3>웹사이트</h3>
+              <a href="#" onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app');">https://lifegame-online.koyeb.app</a>
+            </article>
+            <article>
+              <h3>이메일</h3>
+              <a href="mailto:dumpling.copig@gmail.com">dumpling.copig@gmail.com</a>
+            </article>
+          </section>
+        </div>
+      </div>
+      <aside>
+        <div class="ad-banner" style="width: 160px; height: 600px; position: sticky; top: 0;">배너 광고</div>
+        <!-- <div class="ad-banner" style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); background-color: purple; width: 728px; height: 90px;">배너 광고</div> -->
+      </aside>
+    </div>
+    <!-- You can also require other files to run in this process -->
+    <script type="module" src="../static/js/renderer.js"></script>
+  </body>
+</html>

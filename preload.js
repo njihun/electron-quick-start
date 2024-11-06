@@ -12,6 +12,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
   navigateTo: (filename = false) => ipcRenderer.send('navigate-to', filename),
   print: (text = 'Test') => ipcRenderer.send('print', text),
+  loadGH: (url) => ipcRenderer.send('loadGH', url),
+  quit: () => ipcRenderer.send('quit'),
 });
 
 window.addEventListener('DOMContentLoaded', () => {

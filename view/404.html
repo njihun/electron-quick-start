@@ -26,8 +26,8 @@
         <div class="translate" data-transKey="err404Count">Returning to the main page in 0 second.</div>
     </div>
     <script type="module">
-        import { goToPage } from "./settings.js";
-        import { translateAll } from "./translate.js";
+        import { goToPage } from "../static/js/settings.js";
+        import { translateAll } from "../static/js/translate.js";
         let count = 10;
         document.body.onload = () => {
             translateAll();
@@ -41,7 +41,7 @@
                 if (count > 0) {
                     counting();
                 } else {
-                    goToPage('index.html');
+                    goToPage('view/game.html');
                 }
             }, 1000);
         }

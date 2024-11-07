@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exit Confirmation</title>
+  <style>
+    .content { text-align: center; }
+    button { margin: 10px; }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h2>Do you want to exit?</h2>
+    <div class="translate" data-transKey="closeCount">The game will close in 0 seconds.</div>
+  </div>
+  <script type="module">
+    import { translateAll } from "../static/js/translate.js";
+    document.body.onload = () => {
+      translateAll();
+      document.querySelector('[data-transKey=closeCount]').innerHTML = document.querySelector('[data-transKey=closeCount]').innerHTML.replace('0', '<span></span>');
+      document.querySelector('span').textContent = count;
+      counting();
+    };
+    let count = 3;
+    function counting() {
+      setTimeout(() => {
+          document.querySelector('span').textContent = --count;
+          if (count > 0) {
+              counting();
+          } else {
+            window.electronAPI.closeWindow();
+          }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

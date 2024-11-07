@@ -10,6 +10,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 // contextBridge를 사용하여 ipcRenderer를 안전하게 노출
 contextBridge.exposeInMainWorld('electronAPI', {
+  closeWindow: () => ipcRenderer.send('close-window'),
+  startGame: () => ipcRenderer.send('start-game'),
   navigateTo: (filename = false) => ipcRenderer.send('navigate-to', filename),
   print: (text = 'Test') => ipcRenderer.send('print', text),
   loadGH: (url) => ipcRenderer.send('loadGH', url),

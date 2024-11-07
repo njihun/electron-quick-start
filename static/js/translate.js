@@ -12,7 +12,8 @@ const languages = {
         loading: 'Loading',
         rejectEnter: 'Cannot Enter.',
         enterHelp: 'Can\'t enter the game?',
-        help: 'Help'
+        help: 'Help',
+        closeCount: 'The game will close in 0 seconds.'
         // Add other phrases as needed
     },
     ko: {
@@ -28,7 +29,8 @@ const languages = {
         loading: '로드 중',
         rejectEnter: '입장할 수 없습니다.',
         enterHelp: '게임에 입장할 수 없나요?',
-        help: '도움말'
+        help: '도움말',
+        closeCount: '게임이 0초 후에 종료됩니다.'
         // Add other phrases as needed
     },
     // Add other languages as needed

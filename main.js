@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron')
 const path = require('node:path')
 const fs = require('fs');
 
@@ -7,15 +7,12 @@ let mainWindow;
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
     autoHideMenuBar: true,
-    // center: true,
-    resizable: false,
-    // alwaysOnTop: true,
   })
   mainWindow.maximizable = true;
   mainWindow.maximize();
@@ -23,9 +20,93 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('view/launcher.html');
 
+  // 종료 이벤트 가로채기
+  mainWindow.on('close', (e) => {
+    e.preventDefault();
+    const response = dialog.showMessageBoxSync(mainWindow, {
+      type: 'question',
+      buttons: ['Cancel', 'Yes'],
+      title: 'Confirm',
+      message: 'Do you want to exit?',
+    });
+
+    if (response === 1) { // 'Yes' 선택 시 종료
+      mainWindow.destroy();
+    }
+  });
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
+
+let exitWindow = null;
+function showExitWindow(window) {
+  exitWindow = new BrowserWindow({
+    width: 728,//400
+    height: 430,//300
+    modal: true,
+    parent: window,
+    alwaysOnTop: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    },
+    resizable: false,
+  });
+
+  exitWindow.loadFile('view/close.html');
+
+  exitWindow.on('closed', () => {
+    exitWindow = null;
+  });
+}
+
+ipcMain.on('close-window', (event) => {
+  const window = BrowserWindow.getFocusedWindow(); // 현재 포커스된 창
+  if (window) {
+    window.close();
+  }
+});
+
+let gameWindow;
+ipcMain.on('start-game', () => {
+  gameWindow = new BrowserWindow({
+    width: 900,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    },
+    autoHideMenuBar: true,
+    center: true,
+    resizable: false,
+    // alwaysOnTop: true,
+  });
+
+  gameWindow.loadFile('view/game.html');
+
+  gameWindow.on('close', (e) => {
+    
+    e.preventDefault();
+    const response = dialog.showMessageBoxSync(mainWindow, {
+      type: 'question',
+      buttons: ['Cancel', 'Yes'],
+      title: 'Confirm',
+      message: 'Do you want to exit?',
+    });
+
+    if (response === 1) { // 'Yes' 선택 시 종료
+      gameWindow.destroy();
+    }
+  });
+
+  gameWindow.on('closed', (e) => {
+    //thank you for playing
+    e.preventDefault();
+    showExitWindow();
+  });
+
+  if (mainWindow) mainWindow.destroy();
+});
+
 // 렌더러에서 전환 요청을 받는 이벤트 리스너 설정
 ipcMain.on('navigate-to', (event, filename) => {
   if (mainWindow) {
@@ -52,7 +133,7 @@ ipcMain.on('loadGH', (event, url) => {
   shell.openExternal(url);
 });
 
-ipcMain.on('quit', (event) => {
+ipcMain.on('quit', () => {
   app.quit();
 });
 

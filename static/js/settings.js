@@ -1,6 +1,6 @@
 import { sharedState, translateAll } from "./translate.js";
-export function goToPage(filename) {
-    window.electronAPI.navigateTo(filename);
+export function goToPage(filename, window2) {
+    window.electronAPI.navigateTo(filename, window2);
 }
 export function printToTerm(text) {
     window.electronAPI.print(text);

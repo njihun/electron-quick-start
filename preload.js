@@ -12,7 +12,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
   closeWindow: () => ipcRenderer.send('close-window'),
   startGame: () => ipcRenderer.send('start-game'),
-  navigateTo: (filename = false) => ipcRenderer.send('navigate-to', filename),
+  navigateTo: (filename = false, window) => ipcRenderer.send('navigate-to', filename, window),
   print: (text = 'Test') => ipcRenderer.send('print', text),
   loadGH: (url) => ipcRenderer.send('loadGH', url),
   quit: () => ipcRenderer.send('quit'),

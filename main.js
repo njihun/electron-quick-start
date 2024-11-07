@@ -12,9 +12,8 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
-    autoHideMenuBar: true,
   })
-  mainWindow.maximizable = true;
+  mainWindow.removeMenu();
   mainWindow.maximize();
 
   // and load the index.html of the app.
@@ -39,27 +38,6 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 }
 
-let exitWindow = null;
-function showExitWindow(window) {
-  exitWindow = new BrowserWindow({
-    width: 728,//400
-    height: 430,//300
-    modal: true,
-    parent: window,
-    alwaysOnTop: true,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    },
-    resizable: false,
-  });
-
-  exitWindow.loadFile('view/close.html');
-
-  exitWindow.on('closed', () => {
-    exitWindow = null;
-  });
-}
-
 ipcMain.on('close-window', (event) => {
   const window = BrowserWindow.getFocusedWindow(); // 현재 포커스된 창
   if (window) {
@@ -75,11 +53,12 @@ ipcMain.on('start-game', () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
-    autoHideMenuBar: true,
     center: true,
     resizable: false,
     // alwaysOnTop: true,
   });
+  gameWindow.removeMenu();
+  gameWindow.maximizable = true;
 
   gameWindow.loadFile('view/game.html');
 
@@ -99,27 +78,56 @@ ipcMain.on('start-game', () => {
   });
 
   gameWindow.on('closed', (e) => {
-    //thank you for playing
     e.preventDefault();
-    showExitWindow();
+    exitWindow = new BrowserWindow({
+      width: 728,//400
+      height: 430,//300
+      modal: true,
+      parent: gameWindow,
+      alwaysOnTop: true,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+      },
+      resizable: false,
+    });
+    exitWindow.removeMenu();
+  
+    exitWindow.loadFile('view/close.html');
+  
+    exitWindow.on('closed', () => {
+      exitWindow = null;
+    });
   });
 
   if (mainWindow) mainWindow.destroy();
 });
 
 // 렌더러에서 전환 요청을 받는 이벤트 리스너 설정
-ipcMain.on('navigate-to', (event, filename) => {
-  if (mainWindow) {
+ipcMain.on('navigate-to', (event, filename, window) => {
+  let focusWindow = BrowserWindow.getFocusedWindow(); // 현재 포커스된 창
+  switch (window) {
+    case 'main':
+      focusWindow = mainWindow;
+      break;
+
+    case 'game':
+      focusWindow = gameWindow;
+      break;
+  
+    default:
+      break;
+  }
+  if (focusWindow) {
     if (!filename) {
-      mainWindow.loadFile('view/404.html');
+      focusWindow.loadFile('view/404.html');
       return;
     }
     // 파일 존재 여부 확인
     fs.access(path.join(__dirname, filename), fs.constants.F_OK, (err) => {
       if (err) {
-        mainWindow.loadFile('view/404.html');
+        focusWindow.loadFile('view/404.html');
       } else {
-        mainWindow.loadFile(filename);
+        focusWindow.loadFile(filename);
       }
     });
   }

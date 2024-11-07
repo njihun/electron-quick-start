@@ -13,6 +13,7 @@ const languages = {
         rejectEnter: 'Cannot Enter.',
         enterHelp: 'Can\'t enter the game?',
         help: 'Help',
+        closeMsg: 'Thank you for playing!',
         closeCount: 'The game will close in 0 seconds.'
         // Add other phrases as needed
     },
@@ -30,6 +31,7 @@ const languages = {
         rejectEnter: '입장할 수 없습니다.',
         enterHelp: '게임에 입장할 수 없나요?',
         help: '도움말',
+        closeMsg: '플레이해 주셔서 감사합니다!',
         closeCount: '게임이 0초 후에 종료됩니다.'
         // Add other phrases as needed
     },

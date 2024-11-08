@@ -32,7 +32,7 @@
     <script type="module">
         import { goToPage } from "../static/js/settings.js";
         import { translateAll } from "../static/js/translate.js";
-        let count = 10;
+        let count = 5;
         document.body.onload = () => {
             translateAll();
             document.querySelector('[data-transKey=err404Count]').innerHTML = document.querySelector('[data-transKey=err404Count]').innerHTML.replace('0', '<span></span>');

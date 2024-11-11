@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/logIn.css">
+</head>
+<body>
+    <div id="content">
+        <div>
+            <h1>Title</h1>
+        </div>
+        <div id="other-services">
+            <span class="translate" data-transKey="signInWithTheOthers">Sign in with other services</span>
+            <div>
+                <a href="#" style="background-color: #fff; background-image: url(../static/imgs/social/logo/googleLogo.svg);"></a>
+                <a href="#" style="background-color:gold; background-image: url(../static/imgs/social/logo/kakaoLogo.svg);"></a>
+                <a href="#" style="background-color:#1dc800; background-image: url(../static/imgs/social/logo/naverLogo.svg);"></a>
+            </div>
+        </div>
+        <div class="boundary-parent">
+            <div class="boundary"></div>
+            <div class="boundary-text">or</div>
+        </div>
+        <div class="form">
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="pwd" placeholder="Password">
+            <button id="submit" class="translate" data-transKey="Login">Login</button>
+        </div>
+        <div id="account-options">
+            <div class="checkbox">
+                <input type="checkbox" checked>
+                <span class="translate" data-transKey="StaySignedIn">Keep me signed in</span>
+            </div>
+            <div>
+                <a href="#" class="translate" data-transKey="resetPwd">Reset password</a>
+                <a href="#" class="translate" data-transKey="signUp" style="margin-left: 15px;">Sign up</a>
+            </div>
+        </div>
+        <div>
+            <div class="boundary-parent">
+                <div class="boundary"></div>
+                <div class="boundary-text"></div>
+            </div>
+            <span style="font-size: 14px;" class="translate" data-transKey="oath">When signing up, I have read and agree to Title’s <a href="#"><strong>Terms of Service</strong></a> & <a href="#"><strong>Privacy Policy</strong></a></span>
+        </div>
+    </div>
+    <footer>
+        <div id="language">
+            <a href="#">English</a>
+            <div class="boundary-landscape"></div>
+            <a href="#">한국어</a>
+        </div>
+        <p>&copy; 2025 Game Studio. All rights reserved.</p>
+    </footer>
+    <script type="module" src="../static/js/logIn.js"></script>
+</body>
+
+</html>

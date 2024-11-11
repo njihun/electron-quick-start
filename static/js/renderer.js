@@ -1,14 +1,15 @@
-function adjustFontSize() {
-    const width = window.innerWidth;
+import * as settings from "./settings.js";
+import { translateAll } from "./translate.js";
 
-    if (width > 900) {
-        document.body.style.fontSize = '2.5vh';
+window.electronAPI.logIn().then((result) => {
+    if (result.success) {
+        //로그인 성공
+        document.querySelector('header > *:last-child > h4').textContent = 'name';
     } else {
-        document.body.style.fontSize = '20px';
+        document.querySelector('header > *:last-child > h4').onclick = () => {
+            //클릭시 로그인 창으로 이동
+            settings.goToPage('view/logIn.html', 'main');
+        };
     }
-}
-
-adjustFontSize();
-
-// 전체 화면 모드에서 크기 조정
-window.addEventListener('resize', adjustFontSize);
+});
+translateAll();

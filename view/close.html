@@ -37,10 +37,10 @@
 </head>
 <body>
   <div class="content">
-    <div class="ad-banner" style="top: 0;">배너 광고</div>
+    <!-- <div class="ad-banner" style="top: 0;">배너 광고</div> -->
     <h2 class="translate" data-transKey="closeMsg">Thank you for playing!</h2>
     <div class="translate" data-transKey="closeCount">The game will close in 0 seconds.</div>
-    <div class="ad-banner">배너 광고</div>
+    <!-- <div class="ad-banner">배너 광고</div> -->
   </div>
   <script type="module">
     import { translateAll } from "../static/js/translate.js";
@@ -50,7 +50,7 @@
       document.querySelector('span').textContent = count;
       counting();
     };
-    let count = 5;
+    let count = 3;
     function counting() {
       setTimeout(() => {
           document.querySelector('span').textContent = --count;

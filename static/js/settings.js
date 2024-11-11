@@ -2,12 +2,10 @@ import { sharedState, translateAll } from "./translate.js";
 export function goToPage(filename, window2) {
     window.electronAPI.navigateTo(filename, window2);
 }
-export function printToTerm(text) {
-    window.electronAPI.print(text);
-}
-export function loadToBrowser(url) {
-    window.electronAPI.loadGH(url);
-}
+export let langList = [
+    {'lang': 'English', 'code': 'en-US'},
+    {'lang': '한국어', 'code': 'ko-KR'}
+]
 export function language() {
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -21,10 +19,7 @@ export function language() {
     let ul = document.createElement('ul');
     ul.style.flexGrow = 1;
     
-    [
-        {'lang': 'English', 'code': 'en-US'},
-        {'lang': '한국어', 'code': 'ko-KR'}
-    ].forEach((e)=>{
+    langList.forEach((e)=>{
         let li = document.createElement('li');
         
         let btn = document.createElement('button');

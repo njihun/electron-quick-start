@@ -27,7 +27,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0em;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -39,9 +39,54 @@ body::-webkit-scrollbar-button {
 }
 
 header {
+    position: sticky;
+    top: 0;
     width: 100%;
-    padding: 1.3em;
-    background-color: red;
+    height: 4em;
+    padding: 0.75em;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header > * {
+    min-width: 2em;
+    min-height: 2em;
+}
+
+header > *:last-child {
+    display: flex;
+    align-items: center;
+}
+
+header > *:last-child > h4 {
+    color: #fff;
+    line-height: 2.5em;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+header > *:last-child > h4:hover {
+    font-weight: bold;
+}
+
+header > *:last-child > canvas {
+    border-radius: 50%;
+    margin-left: 1em;
+    margin-right: 0.8em;
+    width: 2.5em;
+    height: 2.5em;
+    border: 0.1em solid #fff;
+    cursor: pointer;
+}
+
+header > *:last-child > canvas:hover {
+    width: 3em;
+    height: 3em;
+    margin-left: 0.75em;
+    margin-right: 0.55em;
+    transition: 0.1s ease;
 }
 
 #content {

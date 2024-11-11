@@ -14,7 +14,18 @@ const languages = {
         enterHelp: 'Can\'t enter the game?',
         help: 'Help',
         closeMsg: 'Thank you for playing!',
-        closeCount: 'The game will close in 0 seconds.'
+        closeCount: 'The game will close in 0 seconds.',
+        oath: 'When signing up, I have read and agree to {}’s {} & {}',
+        termsOfService: 'Terms of Service',
+        privacyPolicy: 'Privacy Policy',
+        signInWithTheOthers: 'Sign in with other services',
+        email: 'Email',
+        pwd: 'Password',
+        Login: 'Login',
+        signUp: 'Sign up',
+        resetPwd: 'Reset password',
+        StaySignedIn: 'Keep me signed in'
+
         // Add other phrases as needed
     },
     ko: {
@@ -32,7 +43,17 @@ const languages = {
         enterHelp: '게임에 입장할 수 없나요?',
         help: '도움말',
         closeMsg: '플레이해 주셔서 감사합니다!',
-        closeCount: '게임이 0초 후에 종료됩니다.'
+        closeCount: '게임이 0초 후에 종료됩니다.',
+        oath: '회원가입 시 {}의 {} 및 {}을 확인하였으며, 동의합니다.',
+        termsOfService: '서비스 약관',
+        privacyPolicy: '개인정보 처리방침',
+        signInWithTheOthers: '다른 서비스로 로그인',
+        email: '이메일',
+        pwd: '비밀번호',
+        Login: '로그인',
+        signUp: '회원가입',
+        resetPwd: '비밀번호 재설정',
+        StaySignedIn: '로그인 상태 유지'
         // Add other phrases as needed
     },
     // Add other languages as needed

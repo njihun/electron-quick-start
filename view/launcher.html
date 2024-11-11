@@ -8,7 +8,14 @@
     <title>launcher</title>
   </head>
   <body>
-    <header>로그인</header>
+    <header>
+      <div></div>
+      <div></div>
+      <div>
+        <h4 class="translate" data-transKey="Login">로그인</h4>
+        <canvas></canvas>
+      </div>
+    </header>
     <div id="content">
       <div>
         <section id="run">
@@ -25,8 +32,8 @@
           <section>
             <h2>정책</h2>
             <p>
-              <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/term');">이용약관</span>
-              <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/privacy');">개인정보처리방침</span>
+              <span class="translate" data-transKey="termsOfService" onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/term');">이용약관</span>
+              <span class="translate" data-transKey="privacyPolicy" onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app/policy/privacy');">개인정보처리방침</span>
               <span onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app');">운영정책</span>
             </p>
           </section>
@@ -38,7 +45,7 @@
               <a href="#" onclick="window.electronAPI.loadGH('https:\/\/lifegame-online.koyeb.app');">https://lifegame-online.koyeb.app</a>
             </article>
             <article>
-              <h3>이메일</h3>
+              <h3 class="translate" data-transKey="email">Email</h3>
               <a href="mailto:dumpling.copig@gmail.com">dumpling.copig@gmail.com</a>
             </article>
           </section>

@@ -1,41 +1,39 @@
-// Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron')
-const path = require('node:path')
-const fs = require('fs');
+import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron';
+import path from 'node:path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import Store from 'electron-store';
+import axios from 'axios';
+
+let store = new Store({
+  // encryptionKey: 'your-secret-encryption-key'  // 암호화에 사용할 키를 설정
+});
+
+// __dirname을 사용하기 위한 처리
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 let mainWindow;
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1300,
+    height: 850,
+    minWidth: 1040,
+    minHeight: 680,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
+    alwaysOnTop: true,
   })
-  mainWindow.removeMenu();
-  mainWindow.maximize();
+  // mainWindow.removeMenu();
 
   // and load the index.html of the app.
   mainWindow.loadFile('view/launcher.html');
 
-  // 종료 이벤트 가로채기
-  mainWindow.on('close', (e) => {
-    e.preventDefault();
-    const response = dialog.showMessageBoxSync(mainWindow, {
-      type: 'question',
-      buttons: ['Cancel', 'Yes'],
-      title: 'Confirm',
-      message: 'Do you want to exit?',
-    });
-
-    if (response === 1) { // 'Yes' 선택 시 종료
-      mainWindow.destroy();
-    }
-  });
-
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 ipcMain.on('close-window', (event) => {
@@ -79,7 +77,7 @@ ipcMain.on('start-game', () => {
 
   gameWindow.on('closed', (e) => {
     e.preventDefault();
-    exitWindow = new BrowserWindow({
+    let exitWindow = new BrowserWindow({
       width: 728,//400
       height: 430,//300
       modal: true,
@@ -142,6 +140,38 @@ ipcMain.on('loadGH', (event, url) => {
 });
 
 ipcMain.on('quit', () => {
+  app.quit();
+});
+
+ipcMain.handle('log-in', async (event, id, pwd) => {
+  if (!id || !pwd) {
+    
+    process.stdout.write(JSON.stringify(store.store));
+    // 저장된 파일 목록
+    
+    const authToken = store.get('credentials')?.authToken;
+    if (!authToken) {
+      return { success: false, msg: '로그인 실패' };
+    } else {
+      let store = new Store({ encryptionKey: authToken });
+      id = store.get('credentials').id;
+      pwd = store.get('credentials').pwd;
+      const credentials = { id, pwd };
+      const response = await axios.post('http://localhost:3000/login', credentials);
+      if (response.data.success) {
+        return { success: true, msg: '로그인 성공' };
+      } else {
+        // 비밀번호 변경 가능성
+        return { success: false, msg: '로그인 실패' };
+      }
+    }
+  } else {
+    // 클라이언트 입력 정보를 바탕으로 로그인 요청
+
+  }
+});
+
+ipcMain.handle('sign-up', (id, pwd) => {
   app.quit();
 });
 
